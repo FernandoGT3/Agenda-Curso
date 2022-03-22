@@ -1,0 +1,73 @@
+
+<%- include('./includes/head') %> 
+<%- include('./includes/nav') %> 
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8 my-4">
+
+            <h1 class="text-center"> Login </h1>
+            <p class="text-center lead">Faça login ou crie sua conta abaixo</p>
+
+            <div class="row">
+
+                <div class="col-lg my-2">
+
+                    <h4>Cadastre-se</h4>
+                    <p>Se você ainda não tem conta, preencha o formulário abaixo:</p>
+                
+                    <form action="/login/register" method="POST">
+                        <input type="hidden" name="_csrf" value= <%= csrfToken %>>
+                        <div class="mb-3">
+                          <label for="emailInput" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="emailInput" name="emailInput" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="passwordInput" class="form-label">Password</label>
+                          <input type="password" class="form-control" id="passwordInput" name="passwordInput">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="passwordRepeatInput" class="form-label">Repeat Password</label>
+                            <input type="password" class="form-control" id="passwordRepeatInput" name="passwordRepeatInput">
+                          </div>
+
+                        <button type="submit" class="btn btn-primary">Criar Conta</button>
+                      </form>
+                
+                </div>
+
+                <div class="col-lg my-2">
+
+                    <h4>Entrar</h4>
+                    <p>Se você já tem uma conta, faça login abaixo:</p>
+
+                    <form action="/login/enter" method="POST">
+                        <input type="hidden" name="_csrf" value= <%= csrfToken %>>
+                        <div class="mb-3">
+                          <label for="emailInput" class="form-label">Email</label>
+                          <input type="email" class="form-control" id="emailInput" name="emailInput" aria-describedby="emailHelp">
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="passwordInput" class="form-label">Password</label>
+                          <input type="password" class="form-control" id="passwordInput" name="passwordInput">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Entrar</button>
+                      </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-lg-2"></div>
+    </div>
+</div>
+
+<%- include('./includes/footer') %> 
