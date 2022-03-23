@@ -18,7 +18,7 @@ const helmet = require('helmet');
 
 const csrf = require('csurf');//csrf tokens que são criados para os formulários
 
-const { checkCSRFError, csrfMiddleware, errorOrSuccessMessage} = require('./src/middlewares/middleware');
+const { sessionUser, checkCSRFError, csrfMiddleware, errorOrSuccessMessage} = require('./src/middlewares/middleware');
 
 app.use(express.urlencoded({ extended: true })); //podemos postar formulários para dentro da aplicação
 
@@ -57,6 +57,7 @@ app.use(csrf());//prevenindo o ataque
 
 app.use(checkCSRFError); //checando o csrf
 app.use(csrfMiddleware); //criando tokens
+app.use(sessionUser);
 app.use(errorOrSuccessMessage); 
 
 app.use(routes);

@@ -17,3 +17,7 @@ exports.errorOrSuccessMessage = (req, res, next) => {
     next();
 }
 
+exports.sessionUser = (req, res, next) => {
+    res.locals.user = req.session.user;
+    next();
+}

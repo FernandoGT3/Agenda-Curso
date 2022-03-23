@@ -16,6 +16,36 @@ class Login {
         this.user = null;
     }
 
+    async entry() {
+        this.validateLogin();
+        if(this.errors.lenght > 0) return;
+
+        this.user = await LoginModel.findOne({ email: this.body.email}); //encontrando um registro na base de dados que tem o email igual ao que esta sendo enviado
+
+        if(!this.user){
+            this.errors.push('Usuário não Cadastrado');
+            return;
+        }
+
+        if(!bcryptjs.compareSync(this.body.password, this.user.password)){
+            this.errors.push('Senha Inválida');
+            this.user = null;
+            return;
+        }
+    }
+
+    validateLogin() {
+        this.cleanUp();
+
+        //Email Válido
+        if(!validator.isEmail(this.body.email)){
+            this.errors.push('Email Inválido')
+        }
+        //Senha Entre 6-30 caracteres
+        if(this.body.password.length < 6 || this.body.password.length > 30) this.errors.push('A Senha precisa ter entre 6 e 30 caracteres.');
+
+    }
+
     async register(){
         this.validate();
         if(this.errors.lenght > 0) return;
@@ -27,17 +57,13 @@ class Login {
         const salt = bcryptjs.genSaltSync();
         this.body.password = bcryptjs.hashSync(this.body.password, salt);
 
-        try{
-            this.user = await LoginModel.create(this.body);
-        }catch(e){
-            console.log(e);
-        }
+        this.user = await LoginModel.create(this.body);
     }
 
     async userExists(){
         const user = await LoginModel.findOne({ email: this.body.email}); //encontrando um registro na base de dados que tem o email igual ao que esta sendo enviado
         //retorna o user ou null
-        if(user) this.errors.push('Usuário já Existe')
+        if(user) this.errors.push('Usuário já Existe');
     }
 
     validate() {
