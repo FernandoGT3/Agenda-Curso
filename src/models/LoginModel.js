@@ -18,7 +18,7 @@ class Login {
 
     async entry() {
         this.validateLogin();
-        if(this.errors.lenght > 0) return;
+        if(this.errors.length > 0) return;
 
         this.user = await LoginModel.findOne({ email: this.body.email}); //encontrando um registro na base de dados que tem o email igual ao que esta sendo enviado
 
@@ -48,11 +48,11 @@ class Login {
 
     async register(){
         this.validate();
-        if(this.errors.lenght > 0) return;
+        if(this.errors.length > 0) return;
 
         await this.userExists();
 
-        if(this.errors.lenght > 0) return;
+        if(this.errors.length > 0) return;
 
         const salt = bcryptjs.genSaltSync();
         this.body.password = bcryptjs.hashSync(this.body.password, salt);
