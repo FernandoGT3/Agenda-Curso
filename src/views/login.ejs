@@ -14,16 +14,16 @@
             <%- include('./includes/messages') %> 
             <div class="row">
 
-                <div class="col-lg my-2">
+                <div class="col-lg my-3">
 
                     <h4>Cadastre-se</h4>
                     <p>Se você ainda não tem conta, preencha o formulário abaixo:</p>
                 
-                    <form action="/login/register" method="POST">
+                    <form class="form-register" action="/login/register" method="POST">
                         <input type="hidden" name="_csrf" value= <%= csrfToken %>>
                         <div class="mb-3">
                           <label for="emailInput" class="form-label">Email</label>
-                          <input type="email" class="form-control" id="emailInput" name="emailInput" aria-describedby="emailHelp">
+                          <input type="email" class="form-control" id="emailInput" name="emailInput">
                         </div>
 
                         <div class="mb-3">
@@ -41,12 +41,12 @@
                 
                 </div>
 
-                <div class="col-lg my-2">
+                <div class="col-lg my-4">
 
                     <h4>Entrar</h4>
                     <p>Se você já tem uma conta, faça login abaixo:</p>
 
-                    <form action="/login/enter" method="POST">
+                    <form class="form-login" action="/login/enter" method="POST">
                         <input type="hidden" name="_csrf" value= <%= csrfToken %>>
                         <div class="mb-3">
                           <label for="emailInput" class="form-label">Email</label>
