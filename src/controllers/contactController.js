@@ -1,3 +1,4 @@
+const { async } = require('regenerator-runtime');
 const Contacts = require('../models/ContactModels');
 const ContactModel = require('../models/ContactModels');
 
@@ -40,4 +41,29 @@ exports.editIndex =  async (req, res) => {
     res.render('contacts', {
         contact
     });
+}
+
+exports.edit = async (req, res) => {
+
+    try {
+        if(!req.params.id) return res.render('404');
+
+        const contact = new ContactModel(req.body);
+    
+        await contact.edit(req.params.id);
+    
+        if(contact.errors.length > 0) {
+            req.flash('errors', contact.errors);
+            req.session.save(() => res.redirect(`/contacts/index/${contact.contact._id}`)); 
+            return;
+        }
+    
+        req.flash('success', 'Contato editado com Sucesso !');
+        req.session.save(() => res.redirect(`/contacts/index/${contact.contact._id}`)); //indo para a página de edição do contato
+        return;
+    } catch (error) {
+        console.log(error);
+        return res.render('404');
+    }
+
 }
