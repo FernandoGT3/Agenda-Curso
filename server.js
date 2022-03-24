@@ -31,17 +31,19 @@ app.use(helmet());
 //configurando a sessão
 const sessionOptions = session({
     secret: 'omceMCFSADFMCACFSMODmmoampdwcmpqw',
-
+    store: MongoStore.create({ mongoUrl: process.env.CONNECTIONSTRING}),
     reseva: false,
     saveUninitialized: false,
     cookie: {
         maxAge: (1000*60*60*24) * 7, //tempo q vai durar o cookie (7dias)
         httpOnly: true
-    },
-    store: MongoStore.create({ mongoUrl: process.env.CONNECTIONSTRING})
+    }
 });
 
-mongoose.connect(process.env.CONNECTIONSTRING)//enviando os dados da conexão 
+mongoose.connect(process.env.CONNECTIONSTRING, {
+    useNewUrlParser:true,
+    useUnifiedTopology: true
+    })//enviando os dados da conexão 
     .then(() => {
         console.log('Conectado a Base');
         app.emit('Pronto');//Fazendo com que app emita um evento, falando que o mongoose ja está conectado

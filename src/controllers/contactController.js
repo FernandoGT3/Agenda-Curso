@@ -1,4 +1,3 @@
-const { async } = require('regenerator-runtime');
 const Contacts = require('../models/ContactModels');
 const ContactModel = require('../models/ContactModels');
 
@@ -54,7 +53,7 @@ exports.edit = async (req, res) => {
     
         if(contact.errors.length > 0) {
             req.flash('errors', contact.errors);
-            req.session.save(() => res.redirect(`/contacts/index/${contact.contact._id}`)); 
+            req.session.save(() => res.redirect(`/contacts/index/${req.params.id}`)); 
             return;
         }
     
@@ -65,5 +64,16 @@ exports.edit = async (req, res) => {
         console.log(error);
         return res.render('404');
     }
+};
 
-}
+exports.delete = async (req, res) => {
+    if(!req.params.id) return res.render('404');
+
+    const contact = await Contacts.delete(req.params.id);
+
+    if(!contact) return res.render('404');
+
+    req.flash('success', 'Contato apagado com Sucesso !');
+    req.session.save(() => res.redirect(req.get('referer'))) //indo para a página de edição do contato
+    return;
+};

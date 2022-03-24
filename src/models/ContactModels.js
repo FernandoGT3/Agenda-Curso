@@ -62,10 +62,26 @@ Contacts.prototype.edit = async function(id) {
     this.contact = await ContactModel.findByIdAndUpdate(id, this.body, {new:true});
 }
 
+//Métodos Estáticos
 Contacts.searchID = async function(id) {
     if(typeof id !== 'string') return;
-    const user = await ContactModel.findById(id);
-    return user;
+    const contact = await ContactModel.findById(id);
+    return contact;
+}
+
+Contacts.searchContacts = async function() {
+    const contacts = await ContactModel.find().sort({
+        editado: -1
+    });
+    return contacts;
+}
+
+Contacts.delete = async function(id) {
+    if(typeof id !== 'string') return;
+    const contact = await ContactModel.findOneAndDelete({
+        _id: id
+    });
+    return contact;
 }
 
 module.exports = Contacts;

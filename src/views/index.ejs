@@ -13,35 +13,24 @@
 
             <%- include('includes/messages') %> 
             
-            <div class="responsive-table">
-                <table class="table my-3">
-                    <tr>
-                        <td>Luiz</td>
-                        <td>Moloni</td>
-                        <td>12231321</td>
-                        <td>Email@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>Luiz</td>
-                        <td>Moloni</td>
-                        <td>12231321</td>
-                        <td>Email@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>Luiz</td>
-                        <td>Moloni</td>
-                        <td>12231321</td>
-                        <td>Email@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>Luiz</td>
-                        <td>Moloni</td>
-                        <td>12231321</td>
-                        <td>Email@example.com</td>
-                    </tr>
-                </table>
-            </div>
-
+            <% if (contacts.length > 0) { %> 
+                <div class="responsive-table">
+                    <table class="table my-3">
+                        <% contacts.forEach(contact => { %> 
+                            <tr>
+                                <td> <%= contact.nome %> </td>
+                                <td> <%= contact.sobrenome %> </td>
+                                <td> <%= contact.email %> </td>
+                                <td> <%= contact.telefone %> </td>
+                                <td> <a href="/contacts/index/<%= contact._id %>"> Editar</a></td>
+                                <td> <a class="text-danger" href="/contacts/delete/<%= contact._id %>">Deletar</a></td>
+                            </tr>
+                        <%  }); %> 
+                    </table>
+                </div>
+            <% } else {%> 
+                <p class="text-center lead">Não há contatos</p>
+            <% } %> 
         </div>
 
         <div class="col-lg-2"></div>
