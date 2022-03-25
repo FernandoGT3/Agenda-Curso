@@ -1,6 +1,121 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./frontend/modules/Contact.js":
+/*!*************************************!*\
+  !*** ./frontend/modules/Contact.js ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Contact)
+/* harmony export */ });
+/* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! validator */ "./node_modules/validator/index.js");
+/* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(validator__WEBPACK_IMPORTED_MODULE_0__);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+
+
+var Contact = /*#__PURE__*/function () {
+  function Contact() {
+    _classCallCheck(this, Contact);
+
+    this.form = document.querySelector('.form-editRegister');
+  }
+
+  _createClass(Contact, [{
+    key: "init",
+    value: function init() {
+      this.events();
+    }
+  }, {
+    key: "events",
+    value: function events() {
+      var _this = this;
+
+      if (!this.form) return;
+      this.form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        _this.validate(e);
+      });
+    }
+  }, {
+    key: "validate",
+    value: function validate(event) {
+      var valid = true;
+
+      var _iterator = _createForOfIteratorHelper(this.form.querySelectorAll('.error-text')),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var errorText = _step.value;
+          errorText.remove();
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      var element = event.target;
+      var nameInput = element.querySelector('input[name="nameInput"]');
+      var lastNameInput = element.querySelector('input[name="lastNameInput"]');
+      var emailInput = element.querySelector('input[name="emailInput"]');
+      var phoneInput = element.querySelector('input[name="phoneInput"]');
+
+      if (!nameInput.value) {
+        var message = "O campo ".concat(nameInput.previousElementSibling.innerHTML, " n\xE3o pode estar em branco");
+        this.createError(nameInput, message);
+        valid = false;
+      }
+
+      if (!emailInput.value && !phoneInput.value) {
+        var _message = 'É necessário que o campo "Email" ou "Telefone" esteja preenchido';
+        this.createError(emailInput, _message);
+        this.createError(phoneInput, _message);
+        valid = false;
+      }
+
+      if (emailInput.value) {
+        if (!validator__WEBPACK_IMPORTED_MODULE_0___default().isEmail(emailInput.value)) {
+          this.createError(emailInput, 'Email Inválido');
+          valid = false;
+        }
+      }
+
+      if (valid) element.submit();
+    }
+  }, {
+    key: "createError",
+    value: function createError(field, message) {
+      var div = document.createElement('div');
+      div.innerHTML = message;
+      div.classList.add('error-text');
+      field.insertAdjacentElement('afterend', div);
+    }
+  }]);
+
+  return Contact;
+}();
+
+
+
+/***/ }),
+
 /***/ "./frontend/modules/Login.js":
 /*!***********************************!*\
   !*** ./frontend/modules/Login.js ***!
@@ -137,6 +252,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ Register)
 /* harmony export */ });
+/* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! validator */ "./node_modules/validator/index.js");
+/* harmony import */ var validator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(validator__WEBPACK_IMPORTED_MODULE_0__);
 function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
@@ -148,6 +265,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+
 
 var Register = /*#__PURE__*/function () {
   function Register() {
@@ -200,8 +319,9 @@ var Register = /*#__PURE__*/function () {
           var field = _step2.value;
 
           if (!field.value) {
-            var message = "Campo \"".concat(field.previousElementSibling.innerHTML, "\" n\xE3o pode estar em branco");
-            this.createError(field, message);
+            var _message = "Campo \"".concat(field.previousElementSibling.innerHTML, "\" n\xE3o pode estar em branco");
+
+            this.createError(field, _message);
             valid = false;
           }
         }
@@ -216,8 +336,22 @@ var Register = /*#__PURE__*/function () {
       var passwordInput = element.querySelector('input[name="passwordInput"]');
       var repeatPasswordInput = element.querySelector('input[name="passwordRepeatInput"]');
 
+      if (emailInput.value) {
+        if (!validator__WEBPACK_IMPORTED_MODULE_0___default().isEmail(emailInput.value)) {
+          this.createError(emailInput, 'Email Inválido');
+          valid = false;
+        }
+      }
+
       if (passwordInput.value.length < 6 || passwordInput.value.length > 30) {
         this.createError(passwordInput, 'Senha Inválida, deve conter entre 6 e 30 caracteres.');
+        valid = false;
+      }
+
+      if (passwordInput.value !== repeatPasswordInput.value) {
+        var message = 'As senhas nos campos "Senha" e "Repetir Senha" precisam ser iguais';
+        this.createError(passwordInput, message);
+        this.createError(repeatPasswordInput, message);
         valid = false;
       }
 
@@ -18297,7 +18431,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_1___default()((_node_modules_css_loader_dist_runtime_sourceMaps_js__WEBPACK_IMPORTED_MODULE_0___default()));
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".error-text {\n    color: red;\n    margin: 0.5em 0;\n}", "",{"version":3,"sources":["webpack://./frontend/assets/css/styles.css"],"names":[],"mappings":"AAAA;IACI,UAAU;IACV,eAAe;AACnB","sourcesContent":[".error-text {\n    color: red;\n    margin: 0.5em 0;\n}"],"sourceRoot":""}]);
+___CSS_LOADER_EXPORT___.push([module.id, ":root{\n    --primary-color:#107d81;\n    --medium-gray-color: #C1CBD2;\n}\n\n*{\n    margin: 0;\n    box-sizing: border-box;\n}\n\nbody{\n    outline: none;\n    background-color: var(--primary-color);\n}\n\n.container{\n    max-width: 80%;\n    margin: 50px auto;\n    padding: 50px;\n    background-color: #EADEDA;\n    border-radius: 20px;\n    box-shadow: 10px 10px 5px gray;\n}\n\ntable tr {\n    border: 0.05rem solid var(--medium-gray-color);\n    padding: 1rem;\n}\n\n.table-title{\n    background-color: rgb(202, 200, 200);\n    border: 0.1rem solid rgb(184, 184, 184);\n}\n\n.responsive-table{\n    overflow: hidden;\n    overflow-x: auto;\n}\n\n.error-text {\n    color: red;\n    margin: 0.5em 0;\n}", "",{"version":3,"sources":["webpack://./frontend/assets/css/styles.css"],"names":[],"mappings":"AAAA;IACI,uBAAuB;IACvB,4BAA4B;AAChC;;AAEA;IACI,SAAS;IACT,sBAAsB;AAC1B;;AAEA;IACI,aAAa;IACb,sCAAsC;AAC1C;;AAEA;IACI,cAAc;IACd,iBAAiB;IACjB,aAAa;IACb,yBAAyB;IACzB,mBAAmB;IACnB,8BAA8B;AAClC;;AAEA;IACI,8CAA8C;IAC9C,aAAa;AACjB;;AAEA;IACI,oCAAoC;IACpC,uCAAuC;AAC3C;;AAEA;IACI,gBAAgB;IAChB,gBAAgB;AACpB;;AAEA;IACI,UAAU;IACV,eAAe;AACnB","sourcesContent":[":root{\n    --primary-color:#107d81;\n    --medium-gray-color: #C1CBD2;\n}\n\n*{\n    margin: 0;\n    box-sizing: border-box;\n}\n\nbody{\n    outline: none;\n    background-color: var(--primary-color);\n}\n\n.container{\n    max-width: 80%;\n    margin: 50px auto;\n    padding: 50px;\n    background-color: #EADEDA;\n    border-radius: 20px;\n    box-shadow: 10px 10px 5px gray;\n}\n\ntable tr {\n    border: 0.05rem solid var(--medium-gray-color);\n    padding: 1rem;\n}\n\n.table-title{\n    background-color: rgb(202, 200, 200);\n    border: 0.1rem solid rgb(184, 184, 184);\n}\n\n.responsive-table{\n    overflow: hidden;\n    overflow-x: auto;\n}\n\n.error-text {\n    color: red;\n    margin: 0.5em 0;\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -27258,15 +27392,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _assets_css_styles_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./assets/css/styles.css */ "./frontend/assets/css/styles.css");
 /* harmony import */ var _modules_Login__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/Login */ "./frontend/modules/Login.js");
 /* harmony import */ var _modules_Register__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/Register */ "./frontend/modules/Register.js");
+/* harmony import */ var _modules_Contact__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Contact */ "./frontend/modules/Contact.js");
+
 
 
 
 
 
 var login = new _modules_Login__WEBPACK_IMPORTED_MODULE_3__["default"]();
-var register = new _modules_Register__WEBPACK_IMPORTED_MODULE_4__["default"]();
 login.init();
+var register = new _modules_Register__WEBPACK_IMPORTED_MODULE_4__["default"]();
 register.init();
+var contact = new _modules_Contact__WEBPACK_IMPORTED_MODULE_5__["default"]();
+contact.init();
 })();
 
 /******/ })()

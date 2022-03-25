@@ -1,13 +1,15 @@
+import validator from 'validator';
+
 export default class Register {
-    constructor(){
+    constructor() {
         this.form = document.querySelector('.form-register');
     }
 
-    init(){
+    init() {
         this.events();
     }
 
-    events(){
+    events() {
         if (!this.form) return;
         this.form.addEventListener('submit', e => {
             e.preventDefault();
@@ -15,18 +17,18 @@ export default class Register {
         });
     }
 
-    validate(event){
+    validate(event) {
         let valid = true;
 
-        for(let errorText of this.form.querySelectorAll('.error-text')){
+        for (let errorText of this.form.querySelectorAll('.error-text')) {
             errorText.remove();
         }
 
-        for(let field of this.form.querySelectorAll('.form-control')){
-            if(!field.value){
+        for (let field of this.form.querySelectorAll('.form-control')) {
+            if (!field.value) {
                 const message = `Campo "${field.previousElementSibling.innerHTML}" não pode estar em branco`;
                 this.createError(field, message);
-                valid = false
+                valid = false;
             }
         }
 
@@ -35,16 +37,29 @@ export default class Register {
         const passwordInput = element.querySelector('input[name="passwordInput"]');
         const repeatPasswordInput = element.querySelector('input[name="passwordRepeatInput"]');
 
-            if (passwordInput.value.length < 6 || passwordInput.value.length > 30) {
-                this.createError(passwordInput, 'Senha Inválida, deve conter entre 6 e 30 caracteres.');
+        if(emailInput.value){
+            if (!validator.isEmail(emailInput.value)) {
+                this.createError(emailInput, 'Email Inválido');
                 valid = false;
             }    
+        }
 
+        if (passwordInput.value.length < 6 || passwordInput.value.length > 30) {
+            this.createError(passwordInput, 'Senha Inválida, deve conter entre 6 e 30 caracteres.');
+            valid = false;
+        }
+        
+        if (passwordInput.value !== repeatPasswordInput.value) {
+            const message = 'As senhas nos campos "Senha" e "Repetir Senha" precisam ser iguais';
+            this.createError(passwordInput, message);
+            this.createError(repeatPasswordInput, message);
+            valid = false;
+        }
 
-        if(valid) element.submit();
+        if (valid) element.submit();
     }
 
-    createError(field, message){
+    createError(field, message) {
         const div = document.createElement('div');
         div.innerHTML = message;
         div.classList.add('error-text');

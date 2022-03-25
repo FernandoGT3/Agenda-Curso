@@ -1,3 +1,42 @@
+:root{
+    --primary-color:#107d81;
+    --medium-gray-color: #C1CBD2;
+}
+
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    outline: none;
+    background-color: var(--primary-color);
+}
+
+.container{
+    max-width: 80%;
+    margin: 50px auto;
+    padding: 50px;
+    background-color: #EADEDA;
+    border-radius: 20px;
+    box-shadow: 10px 10px 5px gray;
+}
+
+table tr {
+    border: 0.05rem solid var(--medium-gray-color);
+    padding: 1rem;
+}
+
+.table-title{
+    background-color: rgb(202, 200, 200);
+    border: 0.1rem solid rgb(184, 184, 184);
+}
+
+.responsive-table{
+    overflow: hidden;
+    overflow-x: auto;
+}
+
 .error-text {
     color: red;
     margin: 0.5em 0;

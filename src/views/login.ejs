@@ -4,9 +4,9 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-2"></div>
+        <div class="col-lg-1"></div>
 
-        <div class="col-lg-8 my-4">
+        <div class="col-lg-10 my-4">
 
             <h1 class="text-center"> Login </h1>
             <p class="text-center lead">Faça login ou crie sua conta abaixo</p>
@@ -14,16 +14,16 @@
             <%- include('./includes/messages') %> 
             <div class="row">
 
-                <div class="col-lg my-3">
+                <div class="col-lg my-4">
 
                     <h4>Cadastre-se</h4>
-                    <p>Se você ainda não tem conta, preencha o formulário abaixo:</p>
+                    <p>Se você ainda não tem uma conta, preencha o formulário abaixo:</p>
                 
                     <form class="form-register" action="/login/register" method="POST">
                         <input type="hidden" name="_csrf" value= <%= csrfToken %>>
                         <div class="mb-3">
                           <label for="emailInput" class="form-label">Email</label>
-                          <input type="email" class="form-control" id="emailInput" name="emailInput">
+                          <input type="email" class="form-control" id="emailInput" name="emailInput" aria-describedby="emailHelp">
                         </div>
 
                         <div class="mb-3">
@@ -37,7 +37,7 @@
                           </div>
 
                         <button type="submit" class="btn btn-primary">Criar Conta</button>
-                      </form>
+                    </form>
                 
                 </div>
 
@@ -67,7 +67,7 @@
 
         </div>
 
-        <div class="col-lg-2"></div>
+        <div class="col-lg-1"></div>
     </div>
 </div>
 
